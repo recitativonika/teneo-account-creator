@@ -37,7 +37,7 @@ async function registerUser(email) {
 
     console.log(chalk.green('successfully register, please confirm your email :', email));
   } catch (error) {
-    console.error(chalk.red('Error during register for', email, ':', error.response ? error.response.data : error.message));
+    console.error(chalk.red('Error during register for', email));
   }
 }
 
