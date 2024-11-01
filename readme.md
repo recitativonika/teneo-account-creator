@@ -39,8 +39,8 @@ Modify the config.js file to set your account parameters:
 	node index.js
 	```
 
-License
+# License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
-Note
+# Note
 This script only for testing purpose, using this script might violates ToS and may get your account permanently banned.
