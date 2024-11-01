@@ -10,10 +10,10 @@ const displayWelcome = () => {
     `);
 };
 
-const signupUrl = "https://ikknngrgxuxgjhplbpey.supabase.co/auth/v1/signup";
+const regurl = "https://ikknngrgxuxgjhplbpey.supabase.co/auth/v1/signup";
 
-const authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlra25uZ3JneHV4Z2pocGxicGV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjU0MzgxNTAsImV4cCI6MjA0MTAxNDE1MH0.DRAvf8nH1ojnJBc3rD_Nw6t1AV8X_g6gmY_HByG2Mag";
-const apikey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlra25uZ3JneHV4Z2pocGxicGV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjU0MzgxNTAsImV4cCI6MjA0MTAxNDE1MH0.DRAvf8nH1ojnJBc3rD_Nw6t1AV8X_g6gmY_HByG2Mag";
+const AUTH = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlra25uZ3JneHV4Z2pocGxicGV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjU0MzgxNTAsImV4cCI6MjA0MTAxNDE1MH0.DRAvf8nH1ojnJBc3rD_Nw6t1AV8X_g6gmY_HByG2Mag";
+const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlra25uZ3JneHV4Z2pocGxicGV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjU0MzgxNTAsImV4cCI6MjA0MTAxNDE1MH0.DRAvf8nH1ojnJBc3rD_Nw6t1AV8X_g6gmY_HByG2Mag";
 
 async function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -21,7 +21,7 @@ async function delay(ms) {
 
 async function registerUser(email) {
   try {
-    const response = await axios.post(signupUrl, {
+    const response = await axios.post(regurl, {
       email: email,
       password: config.password,
       data: { invited_by: config.reff },
@@ -30,14 +30,14 @@ async function registerUser(email) {
       code_challenge_method: null
     }, {
       headers: {
-        'Authorization': authorization,
-        'apikey': apikey
+        'Authorization': AUTH,
+        'apikey': API_KEY
       }
     });
 
-    console.log(chalk.green('Registration successful. Please confirm your email address:', email));
+    console.log(chalk.green('successfully register, please confirm your email :', email));
   } catch (error) {
-    console.error(chalk.red('Error during registration for', email, ':', error.response ? error.response.data : error.message));
+    console.error(chalk.red('Error during register for', email, ':', error.response ? error.response.data : error.message));
   }
 }
 
