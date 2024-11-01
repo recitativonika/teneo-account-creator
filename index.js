@@ -6,7 +6,7 @@ const config = require('./config');
 const displayWelcome = () => {
     console.log(`
 * Teneo account creator *
-* github/recitativonika *
+* github.com/recitativonika *
     `);
 };
 
