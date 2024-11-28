@@ -1,6 +1,7 @@
 const fs = require('fs');
 const axios = require('axios');
 const chalk = require('chalk');
+const readline = require('readline');
 const config = require('./config');
 
 const displayWelcome = () => {
@@ -19,8 +20,22 @@ async function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function registerUser(email) {
+async function registerUser(email, proxy) {
   try {
+    const axiosConfig = {
+      headers: {
+        'Authorization': AUTH,
+        'apikey': API_KEY
+      }
+    };
+
+    if (proxy) {
+      axiosConfig.proxy = {
+        host: proxy.split(':')[0],
+        port: parseInt(proxy.split(':')[1])
+      };
+    }
+
     const response = await axios.post(regurl, {
       email: email,
       password: config.password,
@@ -28,34 +43,48 @@ async function registerUser(email) {
       gotrue_meta_security: {},
       code_challenge: null,
       code_challenge_method: null
-    }, {
-      headers: {
-        'Authorization': AUTH,
-        'apikey': API_KEY
-      }
-    });
+    }, axiosConfig);
 
-    console.log(chalk.green('successfully register, please confirm your email :', email));
+    console.log(chalk.green('Successfully registered, please confirm your email:', email));
   } catch (error) {
-    console.error(chalk.red('Error during register for', email));
+    console.error(chalk.red('Error during registration for', email));
   }
 }
 
-async function readEmailsAndRegister() {
+async function readEmailsAndRegister(useProxy) {
   fs.readFile('email.txt', 'utf8', async (err, data) => {
     if (err) {
       console.error(chalk.red('Error reading email file:', err));
       return;
     }
 
-    const emails = data.split('\n').filter(email => email.trim() !== '');
-    for (const email of emails) {
-      await registerUser(email.trim());
+    const lines = data.split('\n').filter(line => line.trim() !== '');
+    for (const line of lines) {
+      const [email, proxy] = line.split(',').map(item => item.trim());
+      await registerUser(email, useProxy ? proxy : null);
       await delay(config.delay);
     }
   });
 }
 
-displayWelcome();
+function askUseProxy() {
+  return new Promise((resolve) => {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
 
-readEmailsAndRegister();
+    rl.question('Do you want to use a proxy? (y/n): ', (answer) => {
+      rl.close();
+      resolve(answer.toLowerCase() === 'y');
+    });
+  });
+}
+
+async function main() {
+  displayWelcome();
+  const useProxy = await askUseProxy();
+  readEmailsAndRegister(useProxy);
+}
+
+main();

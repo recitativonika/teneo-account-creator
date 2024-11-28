@@ -1,4 +1,4 @@
-user1@example.com
-user2@example.com
-user3@example.com
-testuser@example.com
+user1@example.com,proxy1
+user2@example.com,proxy2
+user3@example.com,proxy3
+testuser@example.com,proxy4
