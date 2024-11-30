@@ -13,16 +13,16 @@ Teneo Account Creator is a simple tool designed to automate the creation of acco
 
 1. Clone the repository to your local machine:
    ```bash
-	git clone https://github.com/recitativonika/teneo-account-creator.git
+   git clone https://github.com/recitativonika/teneo-account-creator.git
    ```
 2. Navigate to the project directory:
-	```bash
-	cd teneo-account-creator
-	```
-3. Install the necessary dependencies:
-	```bash
-	npm install
-	```
+   ```bash
+   cd teneo-account-creator
+   ```
+4. Install the necessary dependencies:
+   ```bash
+   npm install
+   ```
 
 ## Usage
 
