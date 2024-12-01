@@ -3,6 +3,7 @@ const axios = require('axios');
 const chalk = require('chalk');
 const readline = require('readline');
 const config = require('./config');
+const { HttpsProxyAgent } = require('https-proxy-agent');
 
 const displayWelcome = () => {
     console.log(`
@@ -30,10 +31,14 @@ async function registerUser(email, proxy) {
     };
 
     if (proxy) {
-      axiosConfig.proxy = {
-        host: proxy.split(':')[0],
-        port: parseInt(proxy.split(':')[1])
-      };
+      const cleanedProxy = proxy.replace(/^http:\/\//, '');
+      const proxyParts = cleanedProxy.split('@');
+      const [authPart, hostPart] = proxyParts.length > 1 ? proxyParts : [null, proxyParts[0]];
+      const [host, port] = hostPart.split(':');
+
+      const proxyUrl = `http://${authPart ? authPart + '@' : ''}${host}:${port}`;
+      console.log(`Using proxy: ${proxyUrl}`);
+      axiosConfig.httpsAgent = new HttpsProxyAgent(proxyUrl);
     }
 
     const response = await axios.post(regurl, {
@@ -47,7 +52,7 @@ async function registerUser(email, proxy) {
 
     console.log(chalk.green('Successfully registered, please confirm your email:', email));
   } catch (error) {
-    console.error(chalk.red('Error during registration for', email));
+    console.error(chalk.red('Error during registration for', email, error.response ? error.response.data : error.message));
   }
 }
 
