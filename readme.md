@@ -34,11 +34,11 @@ Teneo Account Creator is a simple tool designed to automate the creation of acco
  	```
 2. Configuration
  	- Modify `proxy.txt` if you want to use proxy with this format
-	  ```bash
-   proxy1
-   proxy2
-   proxy3
-   	  ```
+	```bash
+   	proxy1
+   	proxy2
+   	proxy3
+	```
 	- Modify the `config.js` file to set your configurations
 	
 4. Run the account creator script:
