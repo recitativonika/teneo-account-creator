@@ -4,6 +4,7 @@
   "description": "A script for mass registering user accounts",
   "main": "index.js",
   "dependencies": {
+    "@supabase/supabase-js": "^2.47.10",
     "axios": "^1.7.8",
     "chalk": "^4.1.0",
     "https-proxy-agent": "^7.0.5"
