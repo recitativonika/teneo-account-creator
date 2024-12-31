@@ -26,23 +26,22 @@ Teneo Account Creator is a simple tool designed to automate the creation of acco
 
 ## Usage
 
-1. Prepare a `email.txt` file in the project directory containing the email addresses and proxy (if you want to use proxy) that you wish to register (one per line), it should look like this:
+1. Prepare a `email.txt` file in the project directory containing the email addresses that you wish to register (one per line), it should look like this:
 	```bash
- 	user1@example.com,proxy1
-	user2@example.com,proxy2
-	user3@example.com,proxy3
-	testuser@example.com,proxy4
-
+ 	email1
+ 	email2
+ 	email3
  	```
-	and set the `config.js` before running the script.
 2. Configuration
-Modify the config.js file to set your account parameters:
-	```
-	reff: refferal code
-	password: The password for the new accounts.
-	delay: The delay in milliseconds between account creation requests.
-	```
-3. Run the account creator script:
+ 	- Modify `proxy.txt` if you want to use proxy with this format
+	  ```bash
+          proxy1
+   	  proxy2
+   	  proxy3
+   	  ```
+	- Modify the `config.js` file to set your configurations
+	
+4. Run the account creator script:
 	```bash
 	node index.js
 	```
