@@ -45,7 +45,8 @@ Teneo Account Creator is a simple tool designed to automate the creation of acco
 	```bash
 	node index.js
 	```
-
+5. Registered account will be saved in `account.txt` with `email,password` format
+ 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
