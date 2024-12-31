@@ -39,7 +39,7 @@ Teneo Account Creator is a simple tool designed to automate the creation of acco
    	proxy2
    	proxy3
 	```
-	- Modify the `config.js` file to set your configurations for reffcode and delay
+	- Modify the `config.js` file in `src` folder to set your configurations for reffcode and delay
 	
 4. Run the account creator script:
 	```bash
